@@ -5,11 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SecondActivity">
+    tools:context=".ThirdActivity">
 
     <EditText
-        android:id="@+id/secondActivityEditText"
+        android:id="@+id/thirdActivityTextEdit"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/textEditHint" />
+        android:ems="10"
+        android:hint="@string/textEditHint"
+        android:inputType="textPersonName" />
 </LinearLayout>

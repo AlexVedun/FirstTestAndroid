@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
     <string name="hello_android">Привет, Андроид</string>
+    <string name="textEditHint">Введите текст</string>
+    <string name="secondActivityButtonText">Second Activity</string>
+    <string name="thirdActivityButtonText">Third Activity</string>
 </resources>

@@ -13,8 +13,10 @@ public class MainActivity extends AppCompatActivity {
 
     private EditText mEditText;
     private Button mButton;
+    private Button mButton2;
     public static final String EDIT_TEXT_VALUE = "text";
-    public static final Integer SECOND_ACTIVITY_REQUEST = 0;
+    public static final int SECOND_ACTIVITY_REQUEST = 0;
+    public static final int THIRD_ACTIVITY_REQUEST = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
 
         mEditText = (EditText) findViewById(R.id.mainActivityEditText);
         mButton = (Button) findViewById(R.id.mainActivityButton);
+        mButton2 = (Button) findViewById(R.id.thirdActivityButton);
 
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -33,6 +36,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivityForResult(intent, SECOND_ACTIVITY_REQUEST);
             }
         }); //Tap
+        mButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String text = mEditText.getText().toString();
+                Intent intent = new Intent(MainActivity.this, ThirdActivity.class);
+                intent.putExtra(EDIT_TEXT_VALUE, text);
+                startActivityForResult(intent, THIRD_ACTIVITY_REQUEST);
+            }
+        });
     }
 
     @Override
@@ -40,14 +52,27 @@ public class MainActivity extends AppCompatActivity {
         // super.onActivityResult(requestCode, resultCode, data);
         Log.d("my", String.valueOf(requestCode));
         Log.d("my", data.toString());
-        if (requestCode == SECOND_ACTIVITY_REQUEST){
-            if (data != null){
-                Toast.makeText(
-                        this
-                        , data.getSerializableExtra(SecondActivity.SECOND_EDIT_TEXT_VALUE).toString()
-                        , Toast.LENGTH_LONG
-                ).show();
-            }
+        String text = "";
+        String activityName = "";
+        switch (requestCode)        {
+            case SECOND_ACTIVITY_REQUEST:
+                if (data != null){
+                    text = data.getSerializableExtra(SecondActivity.SECOND_EDIT_TEXT_VALUE).toString();
+                    activityName = "Activity 2";
+                }
+                break;
+            case THIRD_ACTIVITY_REQUEST:
+                if (data != null){
+                    text = data.getSerializableExtra(ThirdActivity.THIRD_EDIT_TEXT_VALUE).toString();
+                    activityName = "Activity 3";
+                }
+                break;
         }
+        mEditText.setText(text);
+        Toast.makeText(
+                this
+                , activityName
+                , Toast.LENGTH_LONG
+        ).show();
     }
 }
